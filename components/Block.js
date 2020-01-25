@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet,View, Animated } from "react-native";
+import { StyleSheet, View, Animated } from "react-native";
 
 import { theme } from "../constants";
 
@@ -16,37 +16,12 @@ export default class Block extends Component {
     }
 
     if (typeof margin === "object") {
-      const marginSize = Object.keys(margin).length;
-      switch (marginSize) {
-        case 1:
-          return {
-            marginTop: margin[0],
-            marginRight: margin[0],
-            marginBottom: margin[0],
-            marginLeft: margin[0]
-          };
-        case 2:
-          return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[0],
-            marginLeft: margin[1]
-          };
-        case 3:
-          return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[2],
-            marginLeft: margin[1]
-          };
-        default:
-          return {
-            marginTop: margin[0],
-            marginRight: margin[1],
-            marginBottom: margin[2],
-            marginLeft: margin[3]
-          };
-      }
+      return {
+        marginTop: margin['top'] | 0,
+        marginRight: margin['right'] | 0,
+        marginBottom: margin['bottom'] | 0,
+        marginLeft: margin['left'] | 0,
+      };
     }
   }
 
@@ -178,10 +153,10 @@ export const styles = StyleSheet.create({
     justifyContent: "center"
   },
   left: {
-    alignItems:"flex-start"
+    alignItems: "flex-start"
   },
   right: {
-    alignItems:"flex-end"
+    alignItems: "flex-end"
   },
   top: {
     justifyContent: "flex-start"

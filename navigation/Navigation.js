@@ -7,9 +7,6 @@ import { SearchScreen, SummonerScreen, ChampionScreen } from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../constants';
 
-const WIDTH = Dimensions.get('window').width;
-const HEIGHT = Dimensions.get('window').height;
-
 
 /**
  * Home-Summoner Search Stack
@@ -44,7 +41,7 @@ const TabNavigator = createBottomTabNavigator(
         Search: {
             screen: SummonerStack,
             navigationOptions: {
-                tabBarLabel: 'SUMMONER',
+                tabBarLabel: 'SEARCH',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
                     <Icon name="search" size={theme.sizes.h2} color={tintColor} />
                 ),
@@ -71,7 +68,7 @@ const TabNavigator = createBottomTabNavigator(
         Item: {
             screen: ChampionScreen,
             navigationOptions: {
-                tabBarLabel: 'Item',
+                tabBarLabel: 'ITEM',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
                     <Icon name="tools" size={theme.sizes.h2} color={tintColor} />
                 ),
@@ -87,8 +84,9 @@ const TabNavigator = createBottomTabNavigator(
                 paddingTop: theme.sizes.padding / 6,
             },
             labelStyle: {
-                fontSize: theme.sizes.caption,
+                fontSize: theme.sizes.caption-1,
                 color: theme.colors.black,
+                fontFamily: theme.fonts.family,
             },
             inactiveTintColor: theme.colors.primary,
             activeTintColor: theme.colors.secondary,

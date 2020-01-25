@@ -26,6 +26,8 @@ const sizes = {
   caption: 12
 };
 
+
+
 const fonts = {
   h1: {
     fontSize: sizes.h1
@@ -47,7 +49,8 @@ const fonts = {
   },
   caption: {
     fontSize: sizes.caption
-  }
+  },
+  family: "Helvetica Neue",
 };
 
 export { colors, sizes, fonts };
