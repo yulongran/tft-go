@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, SafeAreaView, Animated } from "react-native";
+import { StyleSheet,View, Animated } from "react-native";
 
 import { theme } from "../constants";
 
@@ -151,9 +151,9 @@ export default class Block extends Component {
     }
 
     return (
-      <SafeAreaView style={blockStyles} {...props}>
+      <View style={blockStyles} {...props}>
         {children}
-      </SafeAreaView>
+      </View>
     );
   }
 }
