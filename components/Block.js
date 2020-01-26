@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Animated } from "react-native";
-
 import { theme } from "../constants";
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class Block extends Component {
   handleMargins() {
@@ -95,6 +95,7 @@ export default class Block extends Component {
       ...props
     } = this.props;
 
+
     const blockStyles = [
       styles.block,
       flex && { flex },
@@ -124,7 +125,6 @@ export default class Block extends Component {
         </Animated.View>
       );
     }
-
     return (
       <View style={blockStyles} {...props}>
         {children}
