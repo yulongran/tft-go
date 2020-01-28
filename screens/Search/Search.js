@@ -2,7 +2,7 @@ import React from 'react';
 import { ImageBackground, StyleSheet, StatusBar, Dimensions, Image } from 'react-native';
 import { Block, Text, InputWithIcon, Button } from '../../components';
 import { theme } from '../../constants';
-import { SummonerCard} from './components';
+import { SummonerCard } from './components';
 
 
 const { width, height } = Dimensions.get('window');
@@ -19,15 +19,15 @@ class Search extends React.Component {
                 <Block margin={{ top: -height * 0.1 }} center style={styles.contentContainer} color={theme.colors.white}>
                     <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} />
                     <Block center middle flex={1} row>
-                    <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.titleLogo}/>
+                        <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.titleLogo} />
                         <Text h1 center bold>Teamfight.
                         <Text h1 primary>Tactics</Text>
                         </Text>
                     </Block>
                     <Block flex={1.5}>
-                        <SummonerCard/>
+                        <SummonerCard />
                     </Block>
-                    <Block bottom style={styles.searchButton} margin={{top: height*0.05}} space="around">
+                    <Block bottom style={styles.searchButton} margin={{ top: height * 0.05 }} space="around">
                         <Button gradient>
                             <Text center semibold white>Search</Text>
                         </Button>
@@ -58,9 +58,10 @@ const styles = StyleSheet.create({
     searchButton: {
         width: width * 0.8,
     },
-    titleLogo:{
-        width: width*0.15,
-        height: width*0.15,
+    titleLogo: {
+        width: width * 0.13,
+        height: width * 0.13,
+        marginRight: width * 0.05,
     },
 })
 
