@@ -29,7 +29,7 @@ const SummonerStack = createStackNavigator(
         },
     },
     {
-        initialRouteName: 'Search',
+        initialRouteName: 'Summoner',
     },
 )
 
