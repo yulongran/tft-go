@@ -68,6 +68,7 @@ export const fetchSummoner = (name, region) => {
             }),
         }).then(res => res.json())
             .then(res => {
+                console.log(res.response)
                 dispatch(fetchSummonerSuccess(res.response));
                 return res.response;
             }).catch(error => {

@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
 import { changeSummoner, fetchLocalSummoner, fetchSummoner } from '../../store/actions/summoner';
+import { fetchLeague} from '../../store/actions/league';
 
 
 const { width, height } = Dimensions.get('window');
@@ -21,6 +22,7 @@ class Search extends React.Component {
     onPressSearch = () =>{
         this.props.navigation.navigate("Summoner");
         this.props.fetchSummoner(this.props.summoner.summoner, this.props.region.region);
+        this.props.fetchLeague(this.props.summoner.summoner_profile.id, this.props.region.region);
     }
 
     render() {
@@ -81,8 +83,8 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = (state) => {
-    const { region, summoner } = state
-    return { region, summoner }
+    const { region, summoner, league } = state
+    return { region, summoner, league }
 };
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
@@ -90,6 +92,7 @@ const mapDispatchToProps = dispatch => (
         changeSummoner,
         fetchLocalSummoner,
         fetchSummoner,
+        fetchLeague,
     }, dispatch)
 );
 

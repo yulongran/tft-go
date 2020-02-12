@@ -1,9 +1,14 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, StatusBar, Dimensions, Image, FlatList } from 'react-native';
+import { SafeAreaView, StyleSheet, StatusBar, Dimensions, Image, FlatList, ActivityIndicator } from 'react-native';
 import { Block, Text, Avatar, Divider } from '../../components';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../../constants';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getIcon } from '../../constants/icon';
+import { getRankIcon } from '../../constants/rank';
+
 
 const { width, height } = Dimensions.get('window');
 class Summoner extends React.Component {
@@ -18,12 +23,12 @@ class Summoner extends React.Component {
                         ListHeaderComponentStyle={styles.listHeaderStyle}
                         ListHeaderComponent={
                             <SafeAreaView style={{ flex: 1 }}>
-                                <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} onPress={()=>{this.props.navigation.goBack(null)}}/>
+                                <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} onPress={() => { this.props.navigation.goBack(null) }} />
                                 <Block flex={1} style={styles.summonerStats}>
                                     <Block center middle row flex={1.5}>
-                                        <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/dragontail-9.24.2/9.24.2/img/profileicon/508.png")} />
+                                        <Avatar image={getIcon(this.props.summoner.summoner_profile.profileIconId)} />
                                         <Block middle flex={2.5} margin={{ left: width * 0.08 }} space="between">
-                                            <Text white h1 bold>TEST #1</Text>
+                                            <Text white h1 bold>{this.props.summoner.summoner_profile.name}</Text>
                                             <Text />
                                             <Text white caption gray2>Ladder Rank: 76 (0.04% of top)</Text>
                                         </Block>
@@ -48,7 +53,7 @@ class Summoner extends React.Component {
                                 </Block>
                                 <Block flex={1} center middle center row style={styles.summonerRank}>
                                     <Block flex={1} center >
-                                        <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/ranked-emblems/Emblem_Challenger.png")} width={width * 0.18} height={width * 0.18} />
+                                        {this.props.league.pending ? <ActivityIndicator size="large" color="#0000ff" /> : <Avatar image={getRankIcon(this.props.league.league[0].tier)} width={width * 0.18} height={width * 0.18} />}
                                     </Block>
                                     <Block flex={2} center>
                                         <Text white semibold h2>
@@ -72,8 +77,8 @@ class Summoner extends React.Component {
                             </SafeAreaView>
                         }
                         data={test}
-                        renderItem={({ item }) =>
-                            <Block center row flex={false} style={styles.matchGame}>
+                        renderItem={({ item, index }) =>
+                            <Block center row flex={false} style={styles.matchGame} key={index.toString()}>
                                 <Block center>
                                     <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/icon/tooltipqiyanadogqiqitier3.922littlelegends.png")} width={width * 0.15} height={width * 0.15} />
                                 </Block>
@@ -169,4 +174,14 @@ const styles = StyleSheet.create({
 })
 
 
-export default Summoner;
+
+const mapStateToProps = (state) => {
+    const { region, summoner, league } = state
+    return { region, summoner, league }
+};
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Summoner);
