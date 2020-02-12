@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { theme } from "../constants";
 
 
-const { WIDTH, HEIGHT } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 export default class Divider extends Component {
   render() {
@@ -20,8 +20,8 @@ export default class Divider extends Component {
     const blockStyles = [
       styles.divider,
       margin && {margin: margin},
-      width && {width: WIDTH * width},
-      height && {height: HEIGHT * height},
+      width && {width: width},
+      height && {height:  height},
       color && {backgroundColor: color}, // custom backgroundColor
     ];
 

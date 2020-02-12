@@ -50,7 +50,7 @@ const fonts = {
   caption: {
     fontSize: sizes.caption
   },
-  family: "Helvetica Neue",
+  family: "Avenir",
 };
 
 export { colors, sizes, fonts };

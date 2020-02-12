@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   // default style
   text: {
     fontSize: theme.sizes.font,
+    fontFamily: theme.fonts.family,
     color: theme.colors.black
   },
   // variations

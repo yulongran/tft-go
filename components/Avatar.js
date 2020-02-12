@@ -18,5 +18,5 @@ export default class Avatar extends PureComponent {
 }
 
 
-Avatar.propTypes = { width: PropTypes.number, height: PropTypes.number, image: PropTypes.object };
+Avatar.propTypes = { width: PropTypes.number, height: PropTypes.number, image: PropTypes.number };
 Avatar.defaultProps = { width: 100, height: 100 };
