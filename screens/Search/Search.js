@@ -3,11 +3,25 @@ import { ImageBackground, StyleSheet, StatusBar, Dimensions, Image } from 'react
 import { Block, Text, InputWithIcon, Button } from '../../components';
 import { theme } from '../../constants';
 import { SummonerCard } from './components';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeRegion } from '../../store/actions/region';
+import { changeSummoner, fetchLocalSummoner, fetchSummoner } from '../../store/actions/summoner';
 
 
 const { width, height } = Dimensions.get('window');
 
 class Search extends React.Component {
+
+    /** Search Input listener */
+    onChangeSearch = (search) => {
+        this.props.changeSummoner(search);
+    }
+
+    onPressSearch = () =>{
+        this.props.navigation.navigate("Summoner");
+        this.props.fetchSummoner(this.props.summoner.summoner, this.props.region.region);
+    }
 
     render() {
         return (
@@ -17,7 +31,7 @@ class Search extends React.Component {
                     <ImageBackground source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/srsnowdownbackground.png")} style={styles.imagebackground} />
                 </Block>
                 <Block margin={{ top: -height * 0.1 }} center style={styles.contentContainer} color={theme.colors.white}>
-                    <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} />
+                    <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} onChangeText={this.onChangeSearch}/>
                     <Block center middle flex={1} row>
                         <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.titleLogo} />
                         <Text h1 center bold>Teamfight.
@@ -28,7 +42,7 @@ class Search extends React.Component {
                         <SummonerCard />
                     </Block>
                     <Block bottom style={styles.searchButton} margin={{ top: height * 0.05 }} space="around">
-                        <Button gradient>
+                        <Button gradient onPress={this.onPressSearch}>
                             <Text center semibold white>Search</Text>
                         </Button>
                         <Button onPress={() => { }}>
@@ -66,4 +80,17 @@ const styles = StyleSheet.create({
 })
 
 
-export default Search;
+const mapStateToProps = (state) => {
+    const { region, summoner } = state
+    return { region, summoner }
+};
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        changeRegion,
+        changeSummoner,
+        fetchLocalSummoner,
+        fetchSummoner,
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

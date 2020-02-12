@@ -18,7 +18,7 @@ class Summoner extends React.Component {
                         ListHeaderComponentStyle={styles.listHeaderStyle}
                         ListHeaderComponent={
                             <SafeAreaView style={{ flex: 1 }}>
-                                <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} />
+                                <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} onPress={()=>{this.props.navigation.goBack(null)}}/>
                                 <Block flex={1} style={styles.summonerStats}>
                                     <Block center middle row flex={1.5}>
                                         <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/dragontail-9.24.2/9.24.2/img/profileicon/508.png")} />

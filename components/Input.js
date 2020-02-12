@@ -15,6 +15,7 @@ class InputWithIcon extends React.Component {
             onChangeText,
             placeholder,
             textInputStyle,
+            ...props
             } = this.props;
         return (
             <View style={[containerStyle, styles.inputContainer]}>
@@ -26,6 +27,7 @@ class InputWithIcon extends React.Component {
                         style={[textInputStyle, styles.textInput]}
                         onChangeText={onChangeText}
                         placeholder={placeholder || "Search summoner name"}
+                        {...props}
                     />
                 </Block>
                 <Block>
