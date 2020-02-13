@@ -7,7 +7,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
 import { changeSummoner, fetchLocalSummoner, fetchSummoner } from '../../store/actions/summoner';
-import { fetchLeague} from '../../store/actions/league';
+import { fetchMatch } from '../../store/actions/match';
+import { fetchLeague } from '../../store/actions/league';
 
 
 const { width, height } = Dimensions.get('window');
@@ -19,10 +20,11 @@ class Search extends React.Component {
         this.props.changeSummoner(search);
     }
 
-    onPressSearch = () =>{
+    onPressSearch = () => {
         this.props.navigation.navigate("Summoner");
         this.props.fetchSummoner(this.props.summoner.summoner, this.props.region.region);
         this.props.fetchLeague(this.props.summoner.summoner_profile.id, this.props.region.region);
+        this.props.fetchMatch(this.props.summoner.summoner_profile.puuid, this.props.region.region);
     }
 
     render() {
@@ -33,7 +35,7 @@ class Search extends React.Component {
                     <ImageBackground source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/srsnowdownbackground.png")} style={styles.imagebackground} />
                 </Block>
                 <Block margin={{ top: -height * 0.1 }} center style={styles.contentContainer} color={theme.colors.white}>
-                    <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} onChangeText={this.onChangeSearch}/>
+                    <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} onChangeText={this.onChangeSearch} onSubmitEditing={(event) => { this.onPressSearch }} />
                     <Block center middle flex={1} row>
                         <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.titleLogo} />
                         <Text h1 center bold>Teamfight.
@@ -93,6 +95,7 @@ const mapDispatchToProps = dispatch => (
         fetchLocalSummoner,
         fetchSummoner,
         fetchLeague,
+        fetchMatch,
     }, dispatch)
 );
 

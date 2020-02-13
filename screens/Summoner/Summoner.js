@@ -8,10 +8,76 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIcon } from '../../constants/icon';
 import { getRankIcon } from '../../constants/rank';
+import { getCompamion } from '../../constants/compamion';
+import { getChampion } from '../../constants/champion';
+import { getItem } from '../../constants/item';
 
 
 const { width, height } = Dimensions.get('window');
 class Summoner extends React.Component {
+
+    /** Compute percentage win rate */
+    getWinRate = (win, lose) => {
+        if (win == 0 && lose == 0) {
+            return 100 + "%"
+        }
+        return (win / (win + lose)).toFixed(3) * 100 + "%";
+    }
+
+
+
+    /** Get summoner companion id */
+    getMyCompanion = (content_ID) => {
+        var companions = require('tftgo/constants/json/companions.json');
+        let location = undefined;
+        companions.map((c) => {
+            if (c.contentId == content_ID) {
+                location = c.loadoutsIcon;
+                location = location.toLowerCase();
+                location = location.replace(/_/g, "");
+                location = location.replace("/lol-game-data/assets/assets/loadouts/companions/", "")
+                location = location.replace(".png", "")
+                location = location.replace('.', "");
+            }
+        })
+        return getCompamion(location)
+    }
+
+    /** Get summoner game stats from a game stats */
+    getMyMatch = (match) => {
+        let result = undefined;
+        match.info.participants.map((p) => {
+            if (p.puuid == this.props.summoner.summoner_profile.puuid) {
+                result = p;
+            }
+        })
+        return result
+    }
+
+    /** Source from https://stackoverflow.com/questions/3733227/javascript-seconds-to-minutes-and-seconds */
+    fmtMSS(s) {
+        return (s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + Math.floor(s)
+    }
+
+    /** Get summoner placement from a match game */
+    getMyPlacement = (match) => {
+        let placement = undefined;
+        match.info.participants.map((p) => {
+            if (p.puuid == this.props.summoner.summoner_profile.puuid) {
+                placement = p.placement;
+            }
+        })
+        switch (placement) {
+            case 1:
+                return "1st"
+            case 2:
+                return "2nd"
+            case 3:
+                return "3rd"
+            default:
+                return `${placement}th`;
+        }
+    }
 
     render() {
         const test = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -26,9 +92,9 @@ class Summoner extends React.Component {
                                 <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} onPress={() => { this.props.navigation.goBack(null) }} />
                                 <Block flex={1} style={styles.summonerStats}>
                                     <Block center middle row flex={1.5}>
-                                        <Avatar image={getIcon(this.props.summoner.summoner_profile.profileIconId)} />
+                                        <Avatar image={getIcon(this.props.summoner.summoner_profile.profileIconId)} width={width * 0.2} height={width * 0.2} />
                                         <Block middle flex={2.5} margin={{ left: width * 0.08 }} space="between">
-                                            <Text white h1 bold>{this.props.summoner.summoner_profile.name}</Text>
+                                            <Text white bold size={width * 0.08}>{this.props.summoner.summoner_profile.name}</Text>
                                             <Text />
                                             <Text white caption gray2>Ladder Rank: 76 (0.04% of top)</Text>
                                         </Block>
@@ -36,20 +102,20 @@ class Summoner extends React.Component {
                                 </Block>
                                 <Block flex={1} style={styles.summonerRank} row middle center>
                                     <Block>
-                                        <Text white bold style={styles.summonerStatsGap}>532</Text>
+                                        <Text white bold style={styles.summonerStatsGap} size={width * 0.04}>{this.props.league.league[0].wins + this.props.league.league[0].losses}</Text>
                                         <Text white>Played</Text>
                                     </Block>
                                     <Block>
-                                        <Text white bold style={styles.summonerStatsGap}>289</Text>
+                                        <Text white bold style={styles.summonerStatsGap} size={width * 0.04}>{this.props.league.league[0].wins}</Text>
                                         <Text white>Win Games</Text>
                                     </Block>
                                     <Block>
-                                        <Text white bold style={styles.summonerStatsGap}>123</Text>
-                                        <Text white>Lose Games</Text>
+                                        <Text white bold style={styles.summonerStatsGap} size={width * 0.04}>{this.getWinRate(this.props.league.league[0].wins, this.props.league.league[0].losses)}</Text>
+                                        <Text white>Win Rate</Text>
                                     </Block>
                                 </Block>
                                 <Block flex={0.25} center >
-                                    <Divider width={width * 0.8} />
+                                    <Divider width={width * 0.8} opacity={0.5} />
                                 </Block>
                                 <Block flex={1} center middle center row style={styles.summonerRank}>
                                     <Block flex={1} center >
@@ -57,10 +123,10 @@ class Summoner extends React.Component {
                                     </Block>
                                     <Block flex={2} center>
                                         <Text white semibold h2>
-                                            CHALLENGER
-                                         </Text>
+                                            {this.props.league.league[0].tier}
+                                        </Text>
                                         <Text white semibold h3>
-                                            1292 LP
+                                            {this.props.league.league[0].leaguePoints} LP
                                         </Text>
                                     </Block>
                                 </Block>
@@ -76,25 +142,25 @@ class Summoner extends React.Component {
                                 </Block>
                             </SafeAreaView>
                         }
-                        data={test}
+                        data={this.props.match.matchList}
                         renderItem={({ item, index }) =>
                             <Block center row flex={false} style={styles.matchGame} key={index.toString()}>
                                 <Block center>
-                                    <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/icon/tooltipqiyanadogqiqitier3.922littlelegends.png")} width={width * 0.15} height={width * 0.15} />
+                                    <Avatar image={this.getMyCompanion(this.getMyMatch(item).companion.content_ID)} width={width * 0.15} height={width * 0.15} />
                                 </Block>
                                 <Block middle flex={1}>
-                                    <Text bold h1># 1</Text>
-                                    <Text light caption>Normal   37:10</Text>
-                                    <Text light caption>1/1/2020</Text>
+                                    <Text bold h1>{this.getMyPlacement(item)}</Text>
+                                    <Text light caption>{item.info.queue_id === 1090 ? "Normal" : "Rank"}   {this.fmtMSS(item.info.game_length)}</Text>
+                                    <Text light caption>{new Date(item.info.game_datetime).toLocaleDateString("en-US")}</Text>
                                 </Block>
                                 <Block center flex={2.2} wrap margin={{ left: 10 }} row >
-                                    {test.map((c, index) => {
+                                    {this.getMyMatch(item).units.map((champion, index) => {
                                         return <Block style={styles.matchChampion} flex={false} key={index.toString()}>
-                                            <Avatar image={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/dragontail-9.24.2/img/champion/splash/Sejuani_0.jpg")} width={width * 0.07} height={width * 0.07} />
-                                            <Block row center middle>
-                                                <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/set2/new_item_icons/1.png")} style={styles.itemImage} />
-                                                <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/set2/new_item_icons/1.png")} style={styles.itemImage} />
-                                                <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/set2/new_item_icons/1.png")} style={styles.itemImage} />
+                                            <Avatar image={getChampion(champion.name)} width={width * 0.07} height={width * 0.07} />
+                                            <Block row center>
+                                                {champion.items.map(item => (
+                                                    <Image source={getItem(item)} style={styles.itemImage} />
+                                                ))}
                                             </Block>
                                         </Block>
                                     })}
@@ -169,15 +235,15 @@ const styles = StyleSheet.create({
         margin: width * 0.008,
     },
     listHeaderStyle: {
-        height: height * 0.45,
+        height: height * 0.5,
     },
 })
 
 
 
 const mapStateToProps = (state) => {
-    const { region, summoner, league } = state
-    return { region, summoner, league }
+    const { region, summoner, league, match } = state
+    return { region, summoner, league, match }
 };
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
