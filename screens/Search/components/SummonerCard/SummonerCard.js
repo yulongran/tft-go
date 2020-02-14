@@ -1,23 +1,32 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Dimensions, Image } from 'react-native';
-import { Block, Text } from '../../../../components';
+import { TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { Block, Text, Avatar } from '../../../../components';
 import { theme } from '../../../../constants';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { getIcon } from '../../../../constants/icon';
+import { fetchLocalSummoner } from '../../../../store/actions/summoner';
+import { changeSummoner } from '../../../../store/actions/summoner';
 
 const { width, height } = Dimensions.get('window');
 
 class SummonerCard extends React.Component {
 
+
+    componentDidMount() {
+        this.props.fetchLocalSummoner("Little Sheep", this.props.region.region);
+    }
+
     render() {
         return (
             <TouchableOpacity>
                 <Block style={styles.summonerCard} color={theme.colors.white}>
-                    <Block flex={1} row center style={{marginBottom: 10}}>
+                    <Block flex={1} row center style={{ marginBottom: 10 }}>
                         <Block flex={1} center>
-                            <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.avatar} />
+                            <Avatar image={getIcon(this.props.summoner.local_summoner_profile.profileIconId)} width={width * 0.15} height={width * 0.15} />
                         </Block>
                         <Block flex={1.5} middle>
-                            <Text h2 bold>Lion meng m</Text>
+                            <Text h2 bold>{this.props.summoner.local_summoner_profile.name}</Text>
                             <Block flex={0.5} />
                             <Text color={theme.colors.tertiary}>UNRANKED</Text>
                         </Block>
@@ -25,7 +34,7 @@ class SummonerCard extends React.Component {
                     <Block flex={1}>
                         <Block row flex={1}>
                             <Block row center middle flex={1}>
-                                <Text body2  bold color="#9DA3B4">Played </Text>
+                                <Text body2 bold color="#9DA3B4">Played </Text>
                                 <Text body2 color="#9DA3B4">523 Games</Text>
                             </Block>
                             <Block row center middle flex={1}>
@@ -38,7 +47,7 @@ class SummonerCard extends React.Component {
                                 <Text body2 bold color="#9DA3B4">Win rate </Text>
                                 <Text body2 color="#9DA3B4">56 %</Text>
                             </Block>
-                            <Block row center middle flex={1}> 
+                            <Block row center middle flex={1}>
                                 <Text body2 bold color="#9DA3B4">Lose </Text>
                                 <Text body2 color="#9DA3B4">132 Games</Text>
                             </Block>
@@ -66,11 +75,18 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
         elevation: 3,
     },
-    avatar: {
-        width: width * 0.15,
-        height: width * 0.15,
-    },
 })
 
 
-export default SummonerCard;
+const mapStateToProps = (state) => {
+    const { region, summoner, league } = state
+    return { region, summoner, league }
+};
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        fetchLocalSummoner,
+        changeSummoner,
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SummonerCard);

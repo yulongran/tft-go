@@ -32,6 +32,7 @@ export const clearMatch = () => {
 }
 
 export const fetchMatch = (puuid, region) => {
+    console.log(puuid);
     return dispatch => {
         dispatch(fetchMatchPending());
         fetch('https://tft-assistant.herokuapp.com/match/listWithDetails', {

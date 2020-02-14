@@ -6,9 +6,7 @@ import { SummonerCard } from './components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
-import { changeSummoner, fetchLocalSummoner, fetchSummoner } from '../../store/actions/summoner';
-import { fetchMatch } from '../../store/actions/match';
-import { fetchLeague } from '../../store/actions/league';
+import { changeSummoner} from '../../store/actions/summoner';
 
 
 const { width, height } = Dimensions.get('window');
@@ -22,9 +20,6 @@ class Search extends React.Component {
 
     onPressSearch = () => {
         this.props.navigation.navigate("Summoner");
-        this.props.fetchSummoner(this.props.summoner.summoner, this.props.region.region);
-        this.props.fetchLeague(this.props.summoner.summoner_profile.id, this.props.region.region);
-        this.props.fetchMatch(this.props.summoner.summoner_profile.puuid, this.props.region.region);
     }
 
     render() {
@@ -92,10 +87,6 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators({
         changeRegion,
         changeSummoner,
-        fetchLocalSummoner,
-        fetchSummoner,
-        fetchLeague,
-        fetchMatch,
     }, dispatch)
 );
 
