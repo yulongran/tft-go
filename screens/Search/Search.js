@@ -6,7 +6,7 @@ import { SummonerCard } from './components';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
-import { changeSummoner} from '../../store/actions/summoner';
+import { changeSummoner } from '../../store/actions/summoner';
 
 
 const { width, height } = Dimensions.get('window');
@@ -26,10 +26,10 @@ class Search extends React.Component {
         return (
             <Block>
                 <StatusBar barStyle="light-content" />
-                <Block>
+                <Block flex={1}>
                     <ImageBackground source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/srsnowdownbackground.png")} style={styles.imagebackground} />
                 </Block>
-                <Block margin={{ top: -height * 0.1 }} center style={styles.contentContainer} color={theme.colors.white}>
+                <Block margin={{ top: -height * 0.1 }} center style={styles.contentContainer} color={theme.colors.white} flex={1.5}>
                     <InputWithIcon containerStyle={{ marginTop: -height * 0.03 }} onChangeText={this.onChangeSearch} onSubmitEditing={(event) => { this.onPressSearch }} />
                     <Block center middle flex={1} row>
                         <Image source={require("/Users/yulongran/react-native/TFT-ASSISTANT/tftgo/assets/images/penguin_logo.png")} style={styles.titleLogo} />
@@ -40,7 +40,7 @@ class Search extends React.Component {
                     <Block flex={1.5}>
                         <SummonerCard />
                     </Block>
-                    <Block bottom style={styles.searchButton} margin={{ top: height * 0.05 }} space="around">
+                    <Block bottom style={styles.searchButton} margin={{ top: height * 0.03 }} space="around">
                         <Button gradient onPress={this.onPressSearch}>
                             <Text center semibold white>Search</Text>
                         </Button>
@@ -48,7 +48,6 @@ class Search extends React.Component {
                             <Text center sembold gray>Terms of Services</Text>
                         </Button>
                     </Block>
-
                 </Block>
             </Block>
         )

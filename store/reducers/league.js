@@ -14,6 +14,9 @@ const initialState = {
     }],
     pending: false,
     error: undefined,
+    local_league:[],
+    local_pending:[],
+    local_error: undefined,
 };
 
 const LeagueReducer = (state = initialState, action) => {

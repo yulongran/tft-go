@@ -36,3 +36,9 @@ allprojects {
         maven { url 'https://jitpack.io' }
     }
 }
+
+
+// Disable all Generation of JavaDoc
+subprojects {
+    tasks.withType(Javadoc).all { enabled = false }
+}
