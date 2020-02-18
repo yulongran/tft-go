@@ -1,8 +1,9 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, StatusBar, Dimensions, Image } from 'react-native';
+import { ImageBackground, StyleSheet, StatusBar, Dimensions, Image, Modal } from 'react-native';
 import { Block, Text, InputWithIcon, Button } from '../../components';
 import { theme } from '../../constants';
-import { SummonerCard } from './components';
+import { SummonerCard, RegisterCard } from './components';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
@@ -12,6 +13,12 @@ import { changeSummoner } from '../../store/actions/summoner';
 const { width, height } = Dimensions.get('window');
 
 class Search extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal_visible: false,
+        }
+    }
 
     /** Search Input listener */
     onChangeSearch = (search) => {
@@ -20,6 +27,23 @@ class Search extends React.Component {
 
     onPressSearch = () => {
         this.props.navigation.navigate("Summoner");
+    }
+
+    onCloseModal = () => {
+        this.setState({
+            modal_visible: false,
+        })
+    }
+
+    onOpenModal = () =>{
+        this.setState({
+            modal_visible: true,
+        })
+    }
+
+    onSubmitModal = (e) => {
+        console.log(e.nativeEvent.text);
+        this.onCloseModal();
     }
 
     render() {
@@ -38,7 +62,7 @@ class Search extends React.Component {
                         </Text>
                     </Block>
                     <Block flex={1.5}>
-                        <SummonerCard />
+                        <RegisterCard onPress={this.onOpenModal} />
                     </Block>
                     <Block bottom style={styles.searchButton} margin={{ top: height * 0.03 }} space="around">
                         <Button gradient onPress={this.onPressSearch}>
@@ -49,6 +73,19 @@ class Search extends React.Component {
                         </Button>
                     </Block>
                 </Block>
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.modal_visible}>
+                    <Block center middle>
+                        <InputWithIcon
+                            placeholder="Enter your summoner name"
+                            containerStyle={{ marginTop: -height * 0.03 }}
+                            onChangeText={() => { }}
+                            onSubmitEditing={this.onSubmitModal}
+                        />
+                    </Block>
+                </Modal>
             </Block>
         )
     }

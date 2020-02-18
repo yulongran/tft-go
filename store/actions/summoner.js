@@ -6,6 +6,7 @@ export const FETCH_LOCAL_SUMMONER_PENDING = 'FETCH_LOCAL_SUMMONER_PENDING';
 export const FETCH_LOCAL_SUMMONER_SUCCESS = 'FETCH_LOCAL_SUMMONER_SUCCESS';
 export const FETCH_LOCAL_SUMMONER_ERROR = 'FETCH_LOCAL_SUMMONER_ERROR';
 export const SUMMONER_UPDATE = "SUMMONER_UPDATE";
+export const LOCAL_SUMMONER_UPDATE= "LOCAL_SUMMONER_UPDATE";
 
 
 export const changeSummoner = (summoner) => {
@@ -57,6 +58,12 @@ export const fetchLocalSummonerError = (error)=>{
 export const summonerUpdate  = ()=>{
     return{
         type: SUMMONER_UPDATE,
+    }
+}
+
+export const localSummonerUpdate  = ()=>{
+    return{
+        type: LOCAL_SUMMONER_UPDATE,
     }
 }
 

@@ -9,14 +9,14 @@ const { width, height } = Dimensions.get('window');
 class InputWithIcon extends React.Component {
     render() {
         const {
-            leftComponent, 
-            rightComponent, 
+            leftComponent,
+            rightComponent,
             containerStyle,
             onChangeText,
             placeholder,
             textInputStyle,
             ...props
-            } = this.props;
+        } = this.props;
         return (
             <View style={[containerStyle, styles.inputContainer]}>
                 <Block>
@@ -59,11 +59,12 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.22,
         shadowRadius: 2.22,
         elevation: 3,
+        height: height * 0.09,
     },
     textInput: {
         height: 45,
         width: width * 0.6,
-        fontSize: theme.sizes.h3-1,
+        fontSize: theme.sizes.h3 - 1,
         color: theme.colors.primary,
     },
 });

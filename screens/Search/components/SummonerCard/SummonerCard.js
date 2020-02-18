@@ -1,11 +1,12 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
 import { Block, Text, Avatar } from '../../../../components';
 import { theme } from '../../../../constants';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIcon } from '../../../../constants/icon';
-import { fetchLocalSummoner } from '../../../../store/actions/summoner';
+import { fetchLocalSummoner, localSummonerUpdate } from '../../../../store/actions/summoner';
+import { fetchLocalLeague } from '../../../../store/actions/league';
 import { changeSummoner } from '../../../../store/actions/summoner';
 
 const { width, height } = Dimensions.get('window');
@@ -14,47 +15,64 @@ class SummonerCard extends React.Component {
 
 
     componentDidMount() {
-        this.props.fetchLocalSummoner("Little Sheep", this.props.region.region);
+        this.props.fetchLocalSummoner("scarra", this.props.region.region);
+    }
+
+    componentDidUpdate() {
+        // After the summoner profile updated and have not yet called fetch summoner league
+        if (this.props.summoner.local_summoner_change && !this.props.summoner.local_summoner_update) {
+            this.props.fetchLocalLeague(this.props.summoner.local_summoner_profile.id, this.props.region.region);
+            this.props.localSummonerUpdate();
+        }
+    }
+
+    /** Compute percentage win rate */
+    getWinRate = (win, lose) => {
+        if (win == 0 && lose == 0) {
+            return 100 + "%"
+        }
+        return ((win / (win + lose)) * 100).toFixed(1) + "%";
     }
 
     render() {
         return (
-            <TouchableOpacity>
-                <Block style={styles.summonerCard} color={theme.colors.white}>
-                    <Block flex={1} row center style={{ marginBottom: 10 }}>
-                        <Block flex={1} center>
-                            <Avatar image={getIcon(this.props.summoner.local_summoner_profile.profileIconId)} width={width * 0.15} height={width * 0.15} />
-                        </Block>
-                        <Block flex={1.5} middle>
-                            <Text h2 bold>{this.props.summoner.local_summoner_profile.name}</Text>
-                            <Block flex={0.5} />
-                            <Text color={theme.colors.tertiary}>UNRANKED</Text>
-                        </Block>
-                    </Block>
-                    <Block flex={1}>
-                        <Block row flex={1}>
-                            <Block row center middle flex={1}>
-                                <Text body2 bold color="#9DA3B4">Played </Text>
-                                <Text body2 color="#9DA3B4">523 Games</Text>
+            < TouchableOpacity >
+                {this.props.league.local_pending ? <ActivityIndicator size="large" color="#0000ff" style={styles.loadingStyle} /> :
+                    <Block style={styles.summonerCard} color={theme.colors.white}>
+                        <Block flex={1} row center style={{ marginBottom: 10 }}>
+                            <Block flex={1} center>
+                                <Avatar image={getIcon(this.props.summoner.local_summoner_profile.profileIconId)} width={width * 0.15} height={width * 0.15} />
                             </Block>
-                            <Block row center middle flex={1}>
-                                <Text body2 bold color="#9DA3B4">Win </Text>
-                                <Text body2 color="#9DA3B4">289 Games</Text>
+                            <Block flex={1.5} middle>
+                                <Text h2 bold>{this.props.summoner.local_summoner_profile.name}</Text>
+                                <Block flex={0.5} />
+                                <Text color={theme.colors.tertiary}>{this.props.league.local_league[0].tier + " "}{this.props.league.local_league[0].leaguePoints + "LP"}</Text>
                             </Block>
                         </Block>
-                        <Block row flex={1}>
-                            <Block row center middle flex={1}>
-                                <Text body2 bold color="#9DA3B4">Win rate </Text>
-                                <Text body2 color="#9DA3B4">56 %</Text>
+                        <Block flex={1}>
+                            <Block row flex={1}>
+                                <Block row center middle flex={1}>
+                                    <Text body2 bold color="#9DA3B4">Played </Text>
+                                    <Text body2 color="#9DA3B4">{this.props.league.local_league[0].wins + this.props.league.local_league[0].losses} Games</Text>
+                                </Block>
+                                <Block row center middle flex={1}>
+                                    <Text body2 bold color="#9DA3B4">Win </Text>
+                                    <Text body2 color="#9DA3B4">{this.props.league.local_league[0].wins} Games</Text>
+                                </Block>
                             </Block>
-                            <Block row center middle flex={1}>
-                                <Text body2 bold color="#9DA3B4">Lose </Text>
-                                <Text body2 color="#9DA3B4">132 Games</Text>
+                            <Block row flex={1}>
+                                <Block row center middle flex={1}>
+                                    <Text body2 bold color="#9DA3B4">Win rate </Text>
+                                    <Text body2 color="#9DA3B4">{this.getWinRate(this.props.league.local_league[0].wins, this.props.league.local_league[0].losses)}</Text>
+                                </Block>
+                                <Block row center middle flex={1}>
+                                    <Text body2 bold color="#9DA3B4">Lose </Text>
+                                    <Text body2 color="#9DA3B4">{this.props.league.local_league[0].losses} Games</Text>
+                                </Block>
                             </Block>
                         </Block>
-                    </Block>
-                </Block>
-            </TouchableOpacity>
+                    </Block>}
+            </TouchableOpacity >
         )
     }
 }
@@ -75,6 +93,10 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
         elevation: 3,
     },
+    loadingStyle: {
+        flex: 1,
+        alignSelf: 'center',
+    },
 })
 
 
@@ -85,7 +107,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => (
     bindActionCreators({
         fetchLocalSummoner,
+        fetchLocalLeague,
         changeSummoner,
+        localSummonerUpdate,
     }, dispatch)
 );
 
