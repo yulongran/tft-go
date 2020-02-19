@@ -1,0 +1,78 @@
+{
+    "B.F. Sword": {
+        "id": 1,
+        "bonus": "+15 Attack Damage.",
+        "kind": "Basic",
+        "buildInto":[
+            "Infinity Edge",
+            "Deathblade",
+            "Hextech Gunblade",
+            "Giant Slayer",
+            "Spear of Shojin",
+            "1 Angel",
+            "Bloodthirster",
+            "Zeke's Herald",
+            "Youmuu's Ghostblade"
+        ]
+    },
+    "Needlessly Large Rod":{
+        "id": 3,
+        "bonus": "+20% Spell Damage",
+        "kind": "Basic",
+        "buildInto":[
+            "Jeweled Guantlet",
+            "Hextech Gunblade",
+            "Rabadon's Deathcap",
+            "Guinsoo's Rageblade",
+            "Luden's Echo",
+            "Locked of the Iron Solari",
+            "Ionic Spark",
+            "Morellonomicon"
+        ]
+    },
+    "Sparring Gloves":{
+        "id": 9,
+        "bonus": "Dodge Chance +10%, Crit Chance +10%",
+        "kind": "Basic",
+        "buildInto":[
+            "Thief's Gloves",
+            "Infinity Edge",
+            "Jeweled Guantlet",
+            "Repeating Crossbow",
+            "Hand of Justice",
+            "Iceborne Gauntlet",
+            "Quicksilver",
+            "Trap Claw"
+        ]
+    },
+    "Recurve Bow":{
+        "id": 2,
+        "bonus": "+20% Attack Speed",
+        "kind": "Basic",
+        "buildInto":[
+            "Repeating Crossbow",
+            "Giant Slayer",
+            "Guinsoo's Rageblade",
+            "Rapid Firecannon",
+            "Statikk Shiv",
+            "Phantom Dancer",
+            "Titanic Hydra",
+            "Blade of the Ruined King"
+        ]
+    },
+    "Tear of the Goddess":{
+        "id": 4,
+        "bonus": "+20 Starting Mana",
+        "kind": "Basic",
+        "buildInto":[
+            "Hand of Justice",
+            "Spear of Shojin",
+            "Luden's Echo",
+            "Statikk Shiv",
+            "Seraph's Embrace",
+            "Frozen Heart",
+            "Hush",
+            "Redemption"
+        ]
+    }
+}
