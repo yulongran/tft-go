@@ -7,7 +7,8 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeRegion } from '../../store/actions/region';
-import { changeSummoner } from '../../store/actions/summoner';
+import { changeSummoner, localSummonerChange, fetchLocalSummoner } from '../../store/actions/summoner';
+import AsyncStorage from '@react-native-community/async-storage';
 
 
 const { width, height } = Dimensions.get('window');
@@ -17,6 +18,7 @@ class Search extends React.Component {
         super(props);
         this.state = {
             modal_visible: false,
+            local_summoner_exists: false,
         }
     }
 
@@ -35,15 +37,49 @@ class Search extends React.Component {
         })
     }
 
-    onOpenModal = () =>{
+    onOpenModal = () => {
         this.setState({
             modal_visible: true,
         })
     }
 
     onSubmitModal = (e) => {
-        console.log(e.nativeEvent.text);
+        this.storeLocalSummoner(e.nativeEvent.text);
+        this.props.localSummonerChange();
+        this.getLocalSummoner();
         this.onCloseModal();
+    }
+
+    storeLocalSummoner = async (summoner) => {
+        try {
+            await AsyncStorage.setItem('summoner', summoner);
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    getLocalSummoner = async () => {
+        try {
+            const value = await AsyncStorage.getItem('summoner')
+            if (value !== null) {
+                this.setState({local_summoner_exists: true,});
+            }
+            else{
+                this.setState({local_summoner_exists: false});
+            }
+        } catch (e) {
+            console.log(e);;
+        }
+    }
+
+    componentDidMount(){
+        this.getLocalSummoner();
+    }
+
+    componentDidUpdate(){
+        if(this.props.summoner.local_summoner_change){
+            this.getLocalSummoner();
+        }
     }
 
     render() {
@@ -62,7 +98,7 @@ class Search extends React.Component {
                         </Text>
                     </Block>
                     <Block flex={1.5}>
-                        <RegisterCard onPress={this.onOpenModal} />
+                        {this.state.local_summoner_exists ? <SummonerCard getLocalSummoenr={this.getLocalSummoner}/>: <RegisterCard onPress={this.onOpenModal} />}
                     </Block>
                     <Block bottom style={styles.searchButton} margin={{ top: height * 0.03 }} space="around">
                         <Button gradient onPress={this.onPressSearch}>
@@ -123,6 +159,8 @@ const mapDispatchToProps = dispatch => (
     bindActionCreators({
         changeRegion,
         changeSummoner,
+        localSummonerChange,
+        fetchLocalSummoner,
     }, dispatch)
 );
 

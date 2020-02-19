@@ -1,7 +1,7 @@
 import {
     CHANGE_SUMMONER, FETCH_SUMMONER_ERROR, FETCH_SUMMONER_PENDING, FETCH_SUMMONER_SUCCESS,
     FETCH_LOCAL_SUMMONER_ERROR, FETCH_LOCAL_SUMMONER_SUCCESS, FETCH_LOCAL_SUMMONER_PENDING,
-    SUMMONER_UPDATE, LOCAL_SUMMONER_UPDATE,
+    SUMMONER_UPDATE, LOCAL_SUMMONER_UPDATE, LOCAL_SUMMONER_CHANGE,
 } from '../actions/summoner';
 
 const initialState = {
@@ -70,9 +70,16 @@ const summonerReducer = (state = initialState, action) => {
                 ...state,
                 summoner_update: true,
             }
+        case LOCAL_SUMMONER_CHANGE:
+            return{
+                ...state,
+                local_summoner_update: false,
+                local_summoner_change: true,
+            }
         case LOCAL_SUMMONER_UPDATE:
             return{
                 ...state,
+                local_summoner_change: false,
                 local_summoner_update: true,
             }
         case FETCH_LOCAL_SUMMONER_SUCCESS:
@@ -81,6 +88,7 @@ const summonerReducer = (state = initialState, action) => {
                 local_pending: false,
                 local_error: undefined,
                 local_summoner_change: true,
+                local_summoner_update: false,
                 local_summoner_profile: action.local_summoner_profile,
             }
         case FETCH_LOCAL_SUMMONER_PENDING:

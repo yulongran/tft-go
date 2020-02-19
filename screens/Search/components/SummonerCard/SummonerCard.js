@@ -1,21 +1,32 @@
 import React from 'react';
-import { TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator } from 'react-native';
+import { TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator, Alert } from 'react-native';
 import { Block, Text, Avatar } from '../../../../components';
 import { theme } from '../../../../constants';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIcon } from '../../../../constants/icon';
-import { fetchLocalSummoner, localSummonerUpdate } from '../../../../store/actions/summoner';
+import { fetchLocalSummoner, localSummonerUpdate, localSummonerChange } from '../../../../store/actions/summoner';
 import { fetchLocalLeague } from '../../../../store/actions/league';
 import { changeSummoner } from '../../../../store/actions/summoner';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
 class SummonerCard extends React.Component {
 
+    getLocalSummoner = async () => {
+        try {
+            const value = await AsyncStorage.getItem('summoner')
+            if (value !== null) {
+                this.props.fetchLocalSummoner(value, this.props.region.region);
+            }
+        } catch (e) {
+            console.log(e);;
+        }
+    }
 
     componentDidMount() {
-        this.props.fetchLocalSummoner("scarra", this.props.region.region);
+        this.getLocalSummoner();
     }
 
     componentDidUpdate() {
@@ -34,9 +45,37 @@ class SummonerCard extends React.Component {
         return ((win / (win + lose)) * 100).toFixed(1) + "%";
     }
 
+    /** Remove Summoner  */
+    async removeItemValue() {
+        try {
+            await AsyncStorage.removeItem("summoner");
+            this.props.localSummonerChange();
+            return true;
+        }
+        catch (exception) {
+            return false;
+        }
+    }
+
+    onLongPressSummonerCard = () => {
+        Alert.alert(
+            'Edit Local Summoner',
+            '',
+            [
+                { text: 'Yes', onPress: () => { this.removeItemValue() } },
+                {
+                    text: 'Cancel',
+                    onPress: () => { },
+                    style: 'cancel',
+                },
+            ],
+            { cancelable: false },
+        );
+    }
+
     render() {
         return (
-            < TouchableOpacity >
+            < TouchableOpacity onLongPress={this.onLongPressSummonerCard}>
                 {this.props.league.local_pending ? <ActivityIndicator size="large" color="#0000ff" style={styles.loadingStyle} /> :
                     <Block style={styles.summonerCard} color={theme.colors.white}>
                         <Block flex={1} row center style={{ marginBottom: 10 }}>
@@ -110,6 +149,7 @@ const mapDispatchToProps = dispatch => (
         fetchLocalLeague,
         changeSummoner,
         localSummonerUpdate,
+        localSummonerChange,
     }, dispatch)
 );
 
