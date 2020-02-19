@@ -5,9 +5,8 @@ import { theme } from '../../../../constants';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getIcon } from '../../../../constants/icon';
-import { fetchLocalSummoner, localSummonerUpdate, localSummonerChange } from '../../../../store/actions/summoner';
+import { fetchLocalSummoner, localSummonerUpdate, localSummonerChange, changeSummoner } from '../../../../store/actions/summoner';
 import { fetchLocalLeague } from '../../../../store/actions/league';
-import { changeSummoner } from '../../../../store/actions/summoner';
 import AsyncStorage from '@react-native-community/async-storage';
 
 const { width, height } = Dimensions.get('window');
@@ -73,9 +72,21 @@ class SummonerCard extends React.Component {
         );
     }
 
+    onPressSummonerCard = async () => {
+        try {
+            const value = await AsyncStorage.getItem('summoner')
+            if (value !== null) {
+                this.props.changeSummoner(value);
+                this.props.navigation.navigate("Summoner");
+            }
+        } catch (e) {
+            console.log(e);;
+        }
+    }
+
     render() {
         return (
-            < TouchableOpacity onLongPress={this.onLongPressSummonerCard}>
+            < TouchableOpacity onLongPress={this.onLongPressSummonerCard} onPress={this.onPressSummonerCard}>
                 {this.props.league.local_pending ? <ActivityIndicator size="large" color="#0000ff" style={styles.loadingStyle} /> :
                     <Block style={styles.summonerCard} color={theme.colors.white}>
                         <Block flex={1} row center style={{ marginBottom: 10 }}>

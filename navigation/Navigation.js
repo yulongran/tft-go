@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { SearchScreen, SummonerScreen, ChampionScreen } from '../screens';
+import { SearchScreen, SummonerScreen, ItemScreen } from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../constants';
 
@@ -47,17 +47,17 @@ const TabNavigator = createBottomTabNavigator(
                 ),
             }
         },
-        Champion: {
-            screen: ChampionScreen,
+        Item: {
+            screen: ItemScreen,
             navigationOptions: {
-                tabBarLabel: 'CHAMPION',
+                tabBarLabel: 'Item',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
                     <Icon name="dragon" size={theme.sizes.h2} color={tintColor} />
                 ),
             }
         },
         Trait: {
-            screen: ChampionScreen,
+            screen: ItemScreen,
             navigationOptions: {
                 tabBarLabel: 'TRAIT',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
@@ -66,7 +66,7 @@ const TabNavigator = createBottomTabNavigator(
             }
         },
         Item: {
-            screen: ChampionScreen,
+            screen: ItemScreen,
             navigationOptions: {
                 tabBarLabel: 'ITEM',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (

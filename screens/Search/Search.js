@@ -98,7 +98,7 @@ class Search extends React.Component {
                         </Text>
                     </Block>
                     <Block flex={1.5}>
-                        {this.state.local_summoner_exists ? <SummonerCard getLocalSummoenr={this.getLocalSummoner}/>: <RegisterCard onPress={this.onOpenModal} />}
+                        {this.state.local_summoner_exists ? <SummonerCard getLocalSummoenr={this.getLocalSummoner} navigation={this.props.navigation}/>: <RegisterCard onPress={this.onOpenModal} />}
                     </Block>
                     <Block bottom style={styles.searchButton} margin={{ top: height * 0.03 }} space="around">
                         <Button gradient onPress={this.onPressSearch}>
