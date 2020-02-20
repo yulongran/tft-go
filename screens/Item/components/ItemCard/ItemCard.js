@@ -3,13 +3,20 @@ import { TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator, Image } fr
 import { Block, Text, Avatar } from '../../../../components';
 import { theme } from '../../../../constants';
 import { getItem } from 'tftgo/constants/item.js';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeItem } from '../../../../store/actions/item';
+
 const { width, height } = Dimensions.get('window');
 
 class ItemCard extends React.Component {
 
-    onPressItem = ()=>{
+    onPressItem = () => {
+        this.props.changeItem(this.props.name);
         this.props.navigation.navigate("BuildItem");
     }
+
     render() {
         return (
             < TouchableOpacity onPress={this.onPressItem}>
@@ -33,7 +40,7 @@ const styles = StyleSheet.create({
         marginRight: width * 0.05,
         marginTop: height * 0.03,
         marginBottom: height * 0.03,
-        backgroundColor:'white',
+        backgroundColor: 'white',
         alignItems: 'center',
         paddingTop: width * 0.045,
         paddingBottom: width * 0.05,
@@ -53,4 +60,14 @@ const styles = StyleSheet.create({
 })
 
 
-export default ItemCard;
+const mapStateToProps = (state) => {
+    const { region, summoner, league, match } = state
+    return { region, summoner, league, match }
+};
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+        changeItem,
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ItemCard);

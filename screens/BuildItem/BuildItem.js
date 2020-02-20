@@ -5,7 +5,11 @@ import { theme } from 'tftgo/constants';
 import { ItemBuilder } from './components';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import Item from '../Item/Item';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeItem } from 'tftgo/store/actions/item.js';
+import BaseItem from 'tftgo/assets/set2/base_items.json';
+import { getItem } from 'tftgo/constants/item.js';
 
 const { width, height } = Dimensions.get('window');
 
@@ -20,21 +24,22 @@ class BuildItem extends React.Component {
                     <SafeAreaView style={styles.container}>
                         <Icon name="chevron-left" size={width * 0.07} color="#ffffff" style={styles.backButton} onPress={() => { this.props.navigation.goBack(null) }} />
                         <Block middle row style={styles.mainItem}>
-                            <Image source={require("tftgo/assets/set2/new_item_icons/1.png")} style={styles.mainItemImage} />
+                            <Image source={getItem(BaseItem[this.props.item.item].id)} style={styles.mainItemImage} />
                             <Block />
-                            <Block left flex={4}>
-                                <Text white bold size={width * 0.07}>BF. Sword</Text>
-                                <Text white gray2>+ 15 Attack Damge</Text>
+                            <Block left flex={5}>
+                                <Text white bold h2>{this.props.item.item}</Text>
+                                <Text />
+                                <Text white caption gray2>{BaseItem[this.props.item.item].bonus}</Text>
                             </Block>
                         </Block>
                         <Block margin={{ top: -height * 0.1 }} style={styles.contentContainer} color={theme.colors.white} flex={3}>
                             <FlatList
-                                data={data}
+                                data={BaseItem[this.props.item.item].buildInto}
                                 renderItem={({ item }) => (
-                                    <ItemBuilder />
+                                    <ItemBuilder item={item} component={this.props.item.item}/>
                                 )}
                                 keyExtractor={item => item.toString()}
-                                contentContainerStyle={{margin:10, marginTop: height*0.03}}
+                                contentContainerStyle={{ margin: 10, marginTop: height * 0.03 }}
                             />
                         </Block>
                     </SafeAreaView>
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     mainItem: {
         marginTop: height * 0.02,
         marginLeft: width * 0.15,
-        marginRight: width * 0.15,
+        marginRight: width * 0.1,
     },
     mainItemImage: {
         width: width * 0.15,
@@ -75,4 +80,13 @@ const styles = StyleSheet.create({
 })
 
 
-export default BuildItem;
+const mapStateToProps = (state) => {
+    const { item } = state
+    return { item }
+};
+const mapDispatchToProps = dispatch => (
+    bindActionCreators({
+    }, dispatch)
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)(BuildItem);

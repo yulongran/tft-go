@@ -4,20 +4,32 @@ import { Block, Text, Avatar } from 'tftgo/components';
 import { theme } from 'tftgo/constants';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome5';
+import buildItem from 'tftgo/assets/set2/build_item.json';
+import baseItem from 'tftgo/assets/set2/base_items.json';
+
+import { getItem } from 'tftgo/constants/item.js';
 
 const { width, height } = Dimensions.get('window');
 
 class ItemBuilder extends React.Component {
 
+    getOtherBuildItem(){
+        if(buildItem[this.props.item].buildFrom[0] === this.props.component ){
+            return buildItem[this.props.item].buildFrom[1];
+        }
+        return buildItem[this.props.item].buildFrom[0];
+
+    }
+
     render() {
         return (
             <Block middle center row style={styles.container} space="evenly" color="white">
                 <Icon name="plus" size={width * 0.07} color="#9DA3B4" />
-                <Image source={require("tftgo/assets/set2/new_item_icons/1.png")} style={styles.mainItemImage} />
+                <Image source={getItem(baseItem[this.getOtherBuildItem()].id)} style={styles.mainItemImage} />
                 <Icon name="equals" size={width * 0.07} color="#9DA3B4" />
-                <Image source={require("tftgo/assets/set2/new_item_icons/1.png")} style={styles.mainItemImage} />
+                <Image source={getItem(buildItem[this.props.item].id)} style={styles.mainItemImage} />
                 <Block flex={0.6}>
-                    <Text adjustsFontSizeToFit={true} numberOfLines={4}>On a kill or assist, gain an additional 15 Attack Damage until end of combat (Stacks infinitely)</Text>
+                    <Text size={width*0.03} numberOfLines={5}>{buildItem[this.props.item].bonus}</Text>
                 </Block>
             </Block>
         )
@@ -40,6 +52,8 @@ const styles = StyleSheet.create({
         elevation: 5,
         marginTop: height * 0.015,
         marginBottom: height * 0.015,
+        paddingTop: height*0.01,
+        paddingBottom: height*0.01,
     },
     mainItemImage: {
         width: width * 0.09,
