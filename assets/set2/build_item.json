@@ -1,0 +1,362 @@
+{
+    "Repeating Crossbow" :{
+        "id": 29,
+        "bonus": "On death, this jumps to an allied champion and grants an additional 30% Attack Speed & Critical Strike chance.",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves", 
+            "Recurve Bow"
+        ]
+    },
+    "Thief's Gloves" :{
+        "id": 99,
+        "bonus": "Extra 10% Crit chance and 10% Dodge chance. This item takes all three item slots. On round begin, copy two random items",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "Sparring Gloves"
+        ]
+    },
+    "Hand of Justice" :{
+        "id": 49,
+        "bonus": "At round start, the wearer randomly gains either 40% increased damage or 40 life on hit",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "Tear of the Goddess"
+        ]
+    },
+    "Infinity Edge" :{
+        "id": 19,
+        "bonus": "Critical Strikes deal +150% damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "B.F. Sword"
+        ]
+    },
+    "Jeweled Guantlet" :{
+        "id": 39,
+        "bonus": "Wearer's abilities can critically strike",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves", 
+            "Needlessly Large Rod"
+        ]
+    },
+    "Quicksilver":{
+        "id": 69,
+        "bonus": "Prevents the next crowd control effect applied to the wearer. Refreshes every 3 seconds",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "Negatron Cloak"
+        ]
+    },
+    "Iceborne Gauntlet":{
+        "id": 59,
+        "bonus": "On dodge, create an expandable zone that lowers Attack Speed by 35%",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "Chain Vest"
+        ]
+    },
+    "Trap Claw":{
+        "id": 79,
+        "bonus": "The wearer starts combat with a spell shield. Stun the enemy that breaks the shield",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Sparring Gloves",
+            "Giant's Belt"
+        ]
+    },
+    "Force of Nature":{
+        "id": 88,
+        "bonus": "Gain +1 to team size",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Spatula",
+            "Spatula"
+        ]
+    },
+    "Blade of the Ruined King":{
+        "id": 28,
+        "bonus": "Wearer is also a Blademaster",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Spatula",
+            "Recurve Bow"
+        ]
+    },
+    "Bloodthirster":{
+        "id": 16,
+        "bonus": "Attacks heal for 40% of damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Negatron Cloak"
+        ]
+    },
+    "Dragon's Claw":{
+        "id": 66,
+        "bonus": "75% resistance to magic damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Negatron Cloak",
+            "Negatron Cloak"
+        ]
+    },
+    "Frozen Heart":{
+        "id": 45,
+        "bonus": "Adjacent enemies lose 35% Attack Speed",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Tear of the Goddess",
+            "Chain Vest"
+        ]
+    },
+    "Frozen Mallet":{
+        "id": 78,
+        "bonus": "Wearer is also a Glacial",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Giant's Belt",
+            "Spatula"
+        ]
+    },
+    "1 Angel":{
+        "id": 15,
+        "bonus": "Revives champ with 500 HP after 2 seconds",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Chain Vest"
+        ]
+    },
+    "Guinsoo's Rageblade":{
+        "id": 23,
+        "bonus": "Attacks give 5% Attack Speed. Stacks infinitely",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Needlessly Large Rod",
+            "Recurve Bow"
+        ]
+    },
+    "Hextech Gunblade":{
+        "id": 13,
+        "bonus": "Heal for 25% of all damage dealt",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Needlessly Large Rod"
+        ]
+    },
+    "Hush":{
+        "id": 46,
+        "bonus": "Heal for 25% of all damage dealt",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Needlessly Large Rod"
+        ]
+    },
+    "Ionic Spark":{
+        "id": 36,
+        "bonus": "Whenever an enemy casts a spell they take 125 true damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Negatron Cloak",
+            "Needlessly Large Rod"
+        ]
+    },
+    "Locked of the Iron Solari":{
+        "id": 35,
+        "bonus": "On start of combat, allies 2 spaces to the left and right gain 300 shield for 8s",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Needlessly Large Rod",
+            "Chain Vest"
+        ]
+    },
+    "Deathblade":{
+        "id": 11,
+        "bonus": "On a kill or assist, gain an additional 15 Attack Damage until end of combat (Stacks infinitely)",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "B.F. Sword"
+        ]
+    },
+    "Luden's Echo":{
+        "id": 34,
+        "bonus": "Deal 180 splash damage on ability hit",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Needlessly Large Rod",
+            "Tear of the Goddess"
+        ]
+    },
+    "Morellonomicon":{
+        "id": 37,
+        "bonus": "Spells burn for 20% of max HP over 10s and reduce healing by 80%",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Needlessly Large Rod",
+            "Giant's Belt"
+        ]
+    },
+    "Phantom Dancer":{
+        "id": 25,
+        "bonus": "Wearer dodges all Critical Strikes (including ability crits)",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Chain Vest",
+            "Recurve Bow"
+        ]
+    },
+    "Rabadon's Deathcap":{
+        "id": 33,
+        "bonus": "Wearer's Ability Damage increased by 50%",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Needlessly Large Rod",
+            "Needlessly Large Rod"
+        ]
+    },
+    "Rapid Firecannon":{
+        "id": 22,
+        "bonus": "Attack Range is doubled",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Recurve Bow",
+            "Recurve Bow"
+        ]
+    },
+    "Red Buff":{
+        "id": 57,
+        "bonus": "Attacks burn for 20% of max HP over 10s and reduce healing by 80%",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Chain Vest",
+            "Giant's Belt"
+        ]
+    },
+    "Redemption":{
+        "id": 47,
+        "bonus": "At 30% health heal all nearby allies for 1500 HP",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Tear of the Goddess",
+            "Giant's Belt"
+        ]
+    },
+    "Runaan's Hurricane":{
+        "id": 26,
+        "bonus": "Attacks hit 1 additional enemy. This extra hit does 75% damage and applies on-hit effects",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Spatula",
+            "Negatron Cloak"
+        ]
+    },
+    "Seraph's Embrace":{
+        "id": 44,
+        "bonus": "Regain 20 mana each time a spell is cast",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Tear of the Goddess",
+            "Tear of the Goddess"
+        ]
+    },
+    "Spear of Shojin":{
+        "id": 14,
+        "bonus": "After casting, gain 18% of max mana per attack",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Tear of the Goddess"
+        ]
+    },
+    "Statikk Shiv":{
+        "id": 24,
+        "bonus": "Every 3rd attack deals 100 splash magical damage to 3 enemies",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Recurve Bow",
+            "Tear of the Goddess"
+        ]
+    },
+    "Sword Breaker":{
+        "id": 56,
+        "bonus": "Attacks have a 33% to disarm for 3s",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Chain Vest",
+            "Negatron Cloak"
+        ]
+    },
+    "Giant Slayer":{
+        "id": 12,
+        "bonus": "Attacks deal an additional 5% enemy max Health as True Damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Recurve Bow",
+            "B.F. Sword"
+        ]
+    },
+    "Titanic Hydra":{
+        "id": 27,
+        "bonus": "Attacks deal 3% Max Health to target and adjacent enemies behind them",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Recurve Bow",
+            "Chain Vest"
+        ]
+    },
+    "Thornmail":{
+        "id": 55,
+        "bonus": "Reflect 100% of of physical damage mitigated as Magic Damage",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Chain Vest",
+            "Chain Vest"
+        ]
+    },
+    "Warmog's Armor":{
+        "id": 77,
+        "bonus": "Regenerate 6% missing Health per second",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Giant's Belt",
+            "Giant's Belt"
+        ]
+    },
+    "Youmuu's Ghostblade":{
+        "id": 18,
+        "bonus": "Wearer is also an Assassin",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Spatula"
+        ]
+    },
+    "Zeke's Herald":{
+        "id": 17,
+        "bonus": "On start of combat, allies 2 spaces to the left and right gain +15% Attack Speed",
+        "kind": "Secondary",
+        "buildFrom":[
+            "B.F. Sword",
+            "Giant's Belt"
+        ]
+    },
+    "Zephyr":{
+        "id": 67,
+        "bonus": "On start of combat banish an enemy for 6 seconds",
+        "kind": "Secondary",
+        "buildFrom":[
+            "Negatron Cloak",
+            "Giant's Belt"
+        ]
+    }
+}

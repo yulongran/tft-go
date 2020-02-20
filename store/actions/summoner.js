@@ -113,7 +113,12 @@ export const fetchLocalSummoner = (name, region) => {
             }),
         }).then(res => res.json())
             .then(res => {
-                dispatch(fetchLocalSummonerSuccess(res.response));
+                if(res.response){
+                    dispatch(fetchLocalSummonerSuccess(res.response));
+                }
+                else{
+                    dispatch(fetchLocalSummonerError("SERVER DOWN"))
+                }
                 return res.response;
             }).catch(error => {
                 dispatch(fetchLocalSummonerError(error));

@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { SearchScreen, SummonerScreen, ItemScreen } from '../screens';
+import { SearchScreen, SummonerScreen, ItemScreen, BuildItemScreen } from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../constants';
 
@@ -34,6 +34,30 @@ const SummonerStack = createStackNavigator(
 )
 
 /**
+ * Item Stack
+ */
+const ItemStack = createStackNavigator(
+    {
+        Item:
+        {
+            screen: ItemScreen,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+        BuildItem:
+        {
+            screen: BuildItemScreen,
+            navigationOptions: {
+                headerShown: false,
+            }
+        },
+    },
+    {
+        initialRouteName: 'Item',
+    },
+)
+/**
  * App Tab Navigation
  */
 const TabNavigator = createBottomTabNavigator(
@@ -48,7 +72,7 @@ const TabNavigator = createBottomTabNavigator(
             }
         },
         Item: {
-            screen: ItemScreen,
+            screen: ItemStack ,
             navigationOptions: {
                 tabBarLabel: 'Item',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
@@ -57,7 +81,7 @@ const TabNavigator = createBottomTabNavigator(
             }
         },
         Trait: {
-            screen: ItemScreen,
+            screen: ItemStack,
             navigationOptions: {
                 tabBarLabel: 'TRAIT',
                 tabBarIcon: ({ tintColor, activeTintColor }) => (
@@ -65,16 +89,6 @@ const TabNavigator = createBottomTabNavigator(
                 ),
             }
         },
-        Item: {
-            screen: ItemScreen,
-            navigationOptions: {
-                tabBarLabel: 'ITEM',
-                tabBarIcon: ({ tintColor, activeTintColor }) => (
-                    <Icon name="tools" size={theme.sizes.h2} color={tintColor} />
-                ),
-            }
-        },
-
     },
     {
         tabBarOptions: {

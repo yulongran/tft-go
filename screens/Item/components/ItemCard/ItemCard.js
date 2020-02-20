@@ -7,11 +7,14 @@ const { width, height } = Dimensions.get('window');
 
 class ItemCard extends React.Component {
 
+    onPressItem = ()=>{
+        this.props.navigation.navigate("BuildItem");
+    }
     render() {
         return (
-            < TouchableOpacity>
+            < TouchableOpacity onPress={this.onPressItem}>
                 <Block color="white" shadow flex={1} style={styles.itemContainer}>
-                    <Text h2 bold>{this.props.name}</Text>
+                    <Text h3 bold adjustsFontSizeToFit={true} numberOfLines={1}>{this.props.name}</Text>
                     <Image source={getItem(this.props.stats.id)} style={styles.itemImage} />
                     <Text style={styles.stats} >{this.props.stats.bonus}</Text>
                 </Block>
@@ -30,12 +33,12 @@ const styles = StyleSheet.create({
         marginRight: width * 0.05,
         marginTop: height * 0.03,
         marginBottom: height * 0.03,
-
+        backgroundColor:'white',
         alignItems: 'center',
-        paddingTop: width * 0.05,
+        paddingTop: width * 0.045,
         paddingBottom: width * 0.05,
-        paddingLeft: width * 0.02,
-        paddingRight: width * 0.02,
+        paddingLeft: width * 0.05,
+        paddingRight: width * 0.05,
         justifyContent: 'space-around',
     },
     itemImage: {

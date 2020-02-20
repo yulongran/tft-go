@@ -16,7 +16,7 @@ class Item extends React.Component {
                         <FlatList
                             data={Object.keys(BaseItem)}
                             renderItem={({ item }) => (
-                                <ItemCard name={item} stats={BaseItem[item]} />
+                                <ItemCard name={item} stats={BaseItem[item]} navigation={this.props.navigation}/>
                             )}
                             keyExtractor={item => item.toString()}
                             numColumns={2}

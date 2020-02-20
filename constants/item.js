@@ -1,6 +1,7 @@
 const ITEM = {
     88: require("tftgo/assets/set2/new_item_icons/88.png"),
     77: require("tftgo/assets/set2/new_item_icons/77.png"),
+    79: require("tftgo/assets/set2/new_item_icons/79.png"),
     89: require("tftgo/assets/set2/new_item_icons/89.png"),
     48: require("tftgo/assets/set2/new_item_icons/48.png"),
     49: require("tftgo/assets/set2/new_item_icons/49.png"),

@@ -89,5 +89,48 @@
             "Sword Breaker",
             "Red Buff"
         ]
+    },
+    "Negatron Cloak":{
+        "id": 6,
+        "bonus": "+20 Magic Resist",
+        "kind": "Basic",
+        "buildInto":[
+            "Quicksilver",
+            "Bloodthirster",
+            "Ionic Spark",
+            "Hush",
+            "Sword Breaker",
+            "Dragon's Claw",
+            "Zephyr",
+            "Runaan's Hurricane"
+        ]
+    },
+    "Giant's Belt":{
+        "id": 7,
+        "bonus": "+200 Health",
+        "kind": "Basic",
+        "buildInto":[
+            "Trap Claw",
+            "Zeke's Herald",
+            "Morellonomicon",
+            "Titanic Hydra",
+            "Redemption",
+            "Red Buff",
+            "Zephyr",
+            "Warmog's Armor",
+            "Frozen Mallet"
+        ]
+    },
+    "Spatula" :{
+        "id": 8,
+        "bonus": "It must do something...",
+        "kind": "Basic",
+        "buildInto":[
+            "Youmuu's Ghostblade",
+            "Blade of the Ruined King",
+            "Runaan's Hurricane",
+            "Frozen Mallet",
+            "Force of Nature"
+        ]
     }
 }
