@@ -74,5 +74,20 @@
             "Hush",
             "Redemption"
         ]
+    },
+    "Chain Vest":{
+        "id": 5,
+        "bonus": "+20 Armor",
+        "kind": "Basic",
+        "buildInto":[
+            "Iceborne Gauntlet",
+            "1 Angel",
+            "Locked of the Iron Solari",
+            "Phantom Dancer",
+            "Frozen Heart",
+            "Thornmail",
+            "Sword Breaker",
+            "Red Buff"
+        ]
     }
 }

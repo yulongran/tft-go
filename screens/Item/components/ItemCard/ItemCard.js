@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, StyleSheet, Dimensions, ActivityIndicator, Image } from 'react-native';
 import { Block, Text, Avatar } from '../../../../components';
 import { theme } from '../../../../constants';
-
+import { getItem } from 'tftgo/constants/item.js';
 const { width, height } = Dimensions.get('window');
 
 class ItemCard extends React.Component {
@@ -11,9 +11,9 @@ class ItemCard extends React.Component {
         return (
             < TouchableOpacity>
                 <Block color="white" shadow flex={1} style={styles.itemContainer}>
-                    <Text h2 bold>BF Sword</Text>
-                    <Image source={require("tftgo/assets/set2/new_item_icons/1.png")} style={styles.itemImage} />
-                    <Text style={styles.stats} >+15 Attack Damge</Text>
+                    <Text h2 bold>{this.props.name}</Text>
+                    <Image source={getItem(this.props.stats.id)} style={styles.itemImage} />
+                    <Text style={styles.stats} >{this.props.stats.bonus}</Text>
                 </Block>
             </TouchableOpacity >
         )
