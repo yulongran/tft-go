@@ -4,6 +4,7 @@ import summonerReducer from './summoner';
 import matchReducer from './match';
 import leagueReducer from './league';
 import itemReducer from './item';
+import leaderBoardReducer from './leaderboard';
 
 const rootReducers = combineReducers({
     region: regionReducer,
@@ -11,5 +12,6 @@ const rootReducers = combineReducers({
     match: matchReducer,
     league: leagueReducer,
     item: itemReducer,
+    leaderboard: leaderBoardReducer,
 });
 export default rootReducers;

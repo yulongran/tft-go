@@ -39,7 +39,7 @@ class BuildItem extends React.Component {
                                     <ItemBuilder item={item} component={this.props.item.item}/>
                                 )}
                                 keyExtractor={item => item.toString()}
-                                contentContainerStyle={{ margin: 10, marginTop: height * 0.03 }}
+                                contentContainerStyle={{ margin: 10, marginTop: height * 0.03, paddingBottom: height * 0.03 }}
                             />
                         </Block>
                     </SafeAreaView>

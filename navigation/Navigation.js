@@ -3,7 +3,7 @@ import { Dimensions } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { createStackNavigator } from 'react-navigation-stack';
-import { SearchScreen, SummonerScreen, ItemScreen, BuildItemScreen } from '../screens';
+import { SearchScreen, SummonerScreen, ItemScreen, BuildItemScreen, LeaderBoardScreen } from '../screens';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { theme } from '../constants';
 
@@ -89,6 +89,15 @@ const TabNavigator = createBottomTabNavigator(
                 ),
             }
         },
+        LeaderBoard:{
+            screen: LeaderBoardScreen,
+            navigationOptions: {
+                tabBarLabel: 'Leaderboard',
+                tabBarIcon: ({ tintColor, activeTintColor }) => (
+                    <Icon name="teamspeak" size={theme.sizes.h2} color={tintColor} />
+                ),
+            }
+        }
     },
     {
         tabBarOptions: {
