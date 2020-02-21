@@ -1,4 +1,4 @@
-const COMPAMION = {
+export const COMPAMION = {
     tooltipturtlejadetier3: require("tftgo/assets/icon/tooltipturtlejadetier3.png"),
     tooltipgriffinparrottier3: require("tftgo/assets/icon/tooltipgriffinparrottier3.png"),
     tooltipsennabunnybeatmakertier1922littlelegends: require("tftgo/assets/icon/tooltipsennabunnybeatmakertier1.922littlelegends.png"),

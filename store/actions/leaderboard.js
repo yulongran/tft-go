@@ -24,7 +24,7 @@ export const fetchLeaderBoardError = (error) => {
 }
 
 
-export const fetchLocalLeague = (encryptedSummonerId, region) => {
+export const fetchLeaderBoard = (region) => {
     return dispatch => {
         dispatch(fetchLeaderBoardPending());
         fetch('https://tft-assistant.herokuapp.com/league/leaderboard', {
@@ -34,12 +34,11 @@ export const fetchLocalLeague = (encryptedSummonerId, region) => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                encryptedSummonerId: encryptedSummonerId,
                 region: region,
             }),
         }).then(res => res.json())
             .then(res => {
-                dispatch(fetchLeaderBoardSuccess(res.response));
+                dispatch(fetchLeaderBoardSuccess(res));
                 return res.response;
             }).catch(error => {
                 dispatch(fetchLeaderBoardError(error));
