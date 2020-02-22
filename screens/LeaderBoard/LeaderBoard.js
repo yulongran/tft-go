@@ -43,7 +43,7 @@ class LeaderBoard extends React.Component {
                         <Avatar image={require("tftgo/assets/images/em_rewards_ranked_tft_challenger2019_selector.emotes_9_23.png")} width={width * 0.2} height={width * 0.2} />
                         <Text bold h2>Leaderboard</Text>
                     </Block>
-                    <Block flex={10} margin={{top: height*0.02}}>
+                    <Block flex={10} margin={{ top: height * 0.02 }}>
                         {this.props.leaderboard.pending || this.props.leaderboard.error ? <ActivityIndicator size="large" color="#0000ff" style={styles.loadingStyle} /> :
                             <FlatList
                                 data={this.props.leaderboard.leaderboard}
