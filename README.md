@@ -1,5 +1,5 @@
 ## TFT-GO
-### A mobile application that provides gaming stats and information about player matches for the game Team Fight Tactics.
+### A mobile application in React Native that provides gaming stats and information about player matches for the game Team Fight Tactics.
 
 
 ## I Installation
