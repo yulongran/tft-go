@@ -2,7 +2,7 @@
 ### A mobile application that provides gaming stats and information about player matches for the game Team Fight Tactics.
 
 
-#### I Installation
+## I Installation
 
 Setting up 
 Assuming React-Native and Xcode is installed 
@@ -14,7 +14,7 @@ Assuming React-Native and Xcode is installed
     react-native run-ios
 
 
-#### II Major Features
+## II Major Features
 
 <p float="left">
   <img src="assets/demo/Simulator Screen Shot - iPhone 11 - 2020-03-17 at 17.36.29.png" width="250" />
@@ -34,7 +34,7 @@ Assuming React-Native and Xcode is installed
 - TFT-GO will provide in-game data such as items, trait and real-time ranking in league.
 
 
-#### IV Server
+## IV Server
 
 Riot prohibits client-side calls to the Riot API in Mobile Apps; therefore, the project sets up a backend server in NodeJS that can make API calls while keeping your API key secure. 
 
@@ -70,16 +70,16 @@ export const fetchLocalLeague = (encryptedSummonerId, region) => {
 
 The following API calls are supported by this project
 
-# TFT Endpoints
-## TFT-SUMMONER-V1
+## TFT Endpoints
+### TFT-SUMMONER-V1
 - [x] `Get a summoner by account ID.`
 - [x] `Get a summoner by summoner name.`
 - [x] `Get a summoner by PUUID.`
 - [x] `Get a summoner by summoner ID.`
-## TFT-MATCH-V1
+### TFT-MATCH-V1
 - [x] `Get match list by summoner PUUID.`
 - [x] `Get match list details.`
-## TFT-LEAGUE-V1
+### TFT-LEAGUE-V1
 - [x] `Get the challenger league for given queue.`
 - [x] `Get league entries in all queues for a given summoner ID.`
 - [x] `Get all the league entries.`
